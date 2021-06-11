@@ -37,6 +37,15 @@ RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "platform-tools"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "platforms;android-30"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "system-images;android-30;google_apis;x86_64"
 
+# Proguard
+
+WORKDIR /opt/android-sdk-linux/tools/proguard/lib
+
+RUN wget https://github.com/Guardsquare/proguard/releases/download/v7.0.1/proguard-7.0.1.zip
+RUN unzip proguard-7.0.1.zip && rm -rf proguard-7.0.1.zip
+RUN rm -f *.jar
+RUN mv proguard-7.0.1/lib/*.jar ./ && rm -rf proguard-7.0.1
+
 # Android NDK
 
 ENV NDK_HOME=/opt/android-ndk-r12b
